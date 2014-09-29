@@ -1,0 +1,77 @@
+<!-- <!DOCTYPE html> -->
+<html ng-app="app">
+  <!--  finder.com reference links  -->
+  <head>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-UVIqIRJeYCEIqUmUnB_iwLGv-gB_e2c&sensor=FALSE&libraries=places"></script>
+
+    <link href='http://fonts.googleapis.com/css?family=Playfair+Display|Paytone+One|Lobster|Droid+Serif|Lobster+Two|Francois+One|Inconsolata|Nunito' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <!-- <link rel="stylesheet" type="text/css" href="reset/main.css"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>finder.com</title>
+  </head>
+  <!-- finder.com page body -->
+  <body ng-controller="myController" ng-init="getLocation()">
+       <!-- finder.com navigation bar -->
+
+     <header>
+        <!-- finder.com navigation bar content -->
+       <div class="navcontent">
+         <img src="image/logo1.png"></img>
+         <h1></h1>
+         <input type="submit" id="submit" value="Search" ng-click="fetchSearch()" >
+         <input type="text" id="enterBox" placeholder="address" title="Enter an address here to find places around" ng-model="enterBox">
+         <input type="text" id="searchFor" placeholder="search for... i.e bank" title="Enter search category" ng-model="searchfor">
+        
+         <!-- <div class="advert">
+           
+         </div> -->
+       </div>
+       <!-- finder.com places option bar-->
+       <div class="options">
+         <ul class="result">
+           <li><a href="#" title="Resturants around" id="food"  ng-click="fetchRecent('food')">Resturant</a></li>
+           <li><a href="#" title="Banks around" id="bank" ng-click="fetchRecent('bank')"> &nbsp;Bank</a></li>
+           <li><a href="#" title="Hotels around" id="hotel" ng-click="fetchRecent('hotel')">Hotel</a></li>
+           <li><a href="#" title="Shops around" id="shop" ng-click="fetchRecent('shop')">Shop</a></li>
+           <li ><a href="#" title="Schools around" id="school" ng-click="fetchRecent('school')">School</a></li>
+        </ul>
+       </div>
+     </header>
+
+      <!-- finder.com page section -->
+     <section>
+        <div class="outputBox">
+
+          <div ng-show="preloader">
+            <img src="image/preloader.GIF" id="preloader">
+          </div>
+          <div ng-repeat="data in datas">
+            <h2 class="nametag">{{data.venue.name}}</h2>
+            <p id="address">{{data.venue.location.address}}</p> 
+            <p id="crossStreet">{{data.venue.location.crossStreet}}</p>
+            <p id="city">{{data.venue.location.city}}</p>
+          </div>       
+         <div class="welcome" ng-hide="welcome">
+            <p id="note1">"Welcome to the wonderful world of autofinder with advanced features of locating any place in the world, you will definitely have a great experience of using autofinder "</p>
+          </div>
+        </div>
+         <!-- finder.com map container  -->
+        <div id="map-canvas" ng-model="canvas">
+          <img src="image/preloader.GIF" id="preloader">
+        </div>
+
+        
+        <div class="error"></div>
+     </section>
+      <!-- finder.com footer -->
+     <footer>
+       
+     </footer>
+
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+  
+  </body>
+</html>

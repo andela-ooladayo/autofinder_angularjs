@@ -151,25 +151,6 @@ ul li a:hover{
   	background: -moz-linear-gradient(rgba(0,200,0,.5), rgba(0,200,0,.8)); /* For Firefox 3.6 to 15 */
     background: linear-gradient(rgba(0,200,0,.2), rgba(0,200,0,.6)); /* Standard syntax */
 }
-.outputBox .loading{
-	position: absolute;
-	top: 0; left:0;
-	width: 100%;
-	height: 100%;
-	background: #eee;
-}
-.outputBox .loading b{
-	width: 130px;
-	display: block;
-	margin: 20% auto;
-}
-.outputBox .loading img{
-}
-
-
-
-
-
 
 #note1{
 	font-size:4.8ex;
@@ -201,6 +182,9 @@ ul li a:hover{
 }
 #city:before{
 	content: "City:  "
+}
+#preloader{
+	margin-top: 20%;
 }
 /************************
 MOBILE PHONE RESOLUTION

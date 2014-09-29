@@ -3,18 +3,14 @@
 var app = angular.module('app',[]);
 
 app.controller('myController',['$scope', '$http', function($scope,$http){
-
   $scope.map=null;
   $scope.marker=null;
   $scope.currentPosition=null;
-
   $scope.url = 'https://api.foursquare.com/v2/venues/explore'
-
  $scope.getLocation = function(){
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
           $scope.showPosition(position)
-
       });
     } 
     else {
@@ -25,7 +21,6 @@ app.controller('myController',['$scope', '$http', function($scope,$http){
       $scope.loadMap(position.coords);
      $scope.currentPosition = position.coords;
     }
-
   $scope.loadMap = function(coordinates) {
     directionsDisplay = new google.maps.DirectionsRenderer();
     geocoder = new google.maps.Geocoder();  
@@ -60,12 +55,8 @@ app.controller('myController',['$scope', '$http', function($scope,$http){
         $scope.map.panTo($scope.marker.getPosition());
       },40000);
     })
-
   }
-  
-
   $scope.initializeSearch = function(){
-
     var address = (document.getElementById('enterBox'));
     var autocomplete = new google.maps.places.Autocomplete(address);
     autocomplete.setTypes(['geocode']);
@@ -86,16 +77,13 @@ app.controller('myController',['$scope', '$http', function($scope,$http){
     });
   }
   $scope.initializeSearch()
-
   $scope.fetchSearch = function(){
-    
+    $scope.datas=null;
+    $scope.preloader=true;
+    $scope.welcome=true;
     geocoder = new google.maps.Geocoder();
-    
     var address = $scope.enterBox;
-   
     geocoder.geocode( { 'address': address}, function(results) {
-        console.log(results)
-        // if (status == google.maps.GeocoderStatus.OK) {
         var newLat = results[0].geometry.location.lat();
         var newLng = results[0].geometry.location.lng();    
         var mapOptions = {
@@ -108,14 +96,9 @@ app.controller('myController',['$scope', '$http', function($scope,$http){
         var la = (results[0].geometry.location.lat());
         var lg = (results[0].geometry.location.lng());
         var LaLg = (la+", "+lg);
-        // console.log(lat);
-        // console.log(lng);
-        // var queryme = $(this).parents().attr('id');
          var url = 'https://api.foursquare.com/v2/venues/explore'
          var config = {
-
-            params:{
-
+          params:{
           client_secret: "QWVA0TKCGU404SQEZGSUMBYWC5FB523KQPRTQWG2K3AXF00H",
           client_id: "CTQUBJ0VCHZS5O405Z0G5SCRCWVECGGJ3QKLTRVSRUG2RI0E",
           ll:"",
@@ -123,33 +106,28 @@ app.controller('myController',['$scope', '$http', function($scope,$http){
           v: "20140707",
           query:"",
           callback:'JSON_CALLBACK'
-
               }
           }
           config.params.ll=LaLg;
           config.params.query=$scope.searchfor;
           $http.jsonp($scope.url, config).success(function(reply){
-                console.log(reply.response.groups[0].items)
+                $scope.preloader=false;
                 $scope.datas=reply.response.groups[0].items;
           })
-         
-      // } 
-      // else {
-      //   alert("Geocode was not successful for the following reason: " + status);
-      // }
     });
-  //   google.maps.event.addDomListener(window, 'load', $scope.enterBox);
   }
-
   $scope.fetchRecent = function(obj){
-    
+    $scope.datas=null;
+    $scope.preloader=true;
+    $scope.welcome=true;
+    $scope.enterBox=null;
+    $scope.searchfor=null;
     var lat = ($scope.currentPosition.latitude);
     var lng = ($scope.currentPosition.longitude);
     var LatLng = (lat+", "+lng);
     var config = {
 
             params:{
-
           client_secret: "QWVA0TKCGU404SQEZGSUMBYWC5FB523KQPRTQWG2K3AXF00H",
           client_id: "CTQUBJ0VCHZS5O405Z0G5SCRCWVECGGJ3QKLTRVSRUG2RI0E",
           ll:LatLng,
@@ -157,15 +135,13 @@ app.controller('myController',['$scope', '$http', function($scope,$http){
           v: "20140707",
           query:"",
           callback:'JSON_CALLBACK'
-
               }
           }
     config.params.query=obj;
     $http.jsonp($scope.url, config).success(function(reply){
+                $scope.preloader=false;
                 console.log(reply.response.groups[0].items)
                 $scope.datas=reply.response.groups[0].items;
           }) 
   }
-
-
 }])

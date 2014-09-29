@@ -22,8 +22,7 @@
          <h1></h1>
          <input type="submit" id="submit" value="Search" ng-click="fetchSearch()" >
          <input type="text" id="enterBox" placeholder="address" title="Enter an address here to find places around" ng-model="enterBox">
-         <input type="text" id="searchFor" placeholder="search for... i.e bank" title="Enter search category" ng-model="search
-         for">
+         <input type="text" id="searchFor" placeholder="search for... i.e bank" title="Enter search category" ng-model="searchfor">
         
          <!-- <div class="advert">
            
@@ -45,15 +44,17 @@
      <section>
         <div class="outputBox">
 
+          <div ng-show="preloader">
+            <img src="image/preloader.GIF" id="preloader">
+          </div>
           <div ng-repeat="data in datas">
             <h2 class="nametag">{{data.venue.name}}</h2>
             <p id="address">{{data.venue.location.address}}</p> 
             <p id="crossStreet">{{data.venue.location.crossStreet}}</p>
             <p id="city">{{data.venue.location.city}}</p>
           </div>       
-         <div class="welcome">
+         <div class="welcome" ng-hide="welcome">
             <p id="note1">"Welcome to the wonderful world of autofinder with advanced features of locating any place in the world, you will definitely have a great experience of using autofinder "</p>
-            <!-- <p id="note2">Click any of the options above to see places around you</br>Enter the address of any place you like to visit and search</br>Zoomout the map to see the route to your destination</br></p> -->
           </div>
         </div>
          <!-- finder.com map container  -->

@@ -121,12 +121,13 @@ app.controller('myController',['$scope', '$http', function($scope,$http){
           ll:"",
           radius:"50000",
           v: "20140707",
-          query:"hotel",
+          query:"",
           callback:'JSON_CALLBACK'
 
               }
           }
           config.params.ll=LaLg;
+          config.params.query=$scope.searchfor;
           $http.jsonp($scope.url, config).success(function(reply){
                 console.log(reply.response.groups[0].items)
                 $scope.datas=reply.response.groups[0].items;
@@ -168,102 +169,3 @@ app.controller('myController',['$scope', '$http', function($scope,$http){
 
 
 }])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// var campusFinder = {
-//   path:"https://api.foursquare.com/v2/venues/explore?callback?",    
-  
-
-//   // FINDER.COM INITIALIZING 
-//   initialize: function() {
-//     campusFinder.getLocation();   
-//     $('#enterBox').keyup(campusFinder.initializeSearch);
-//     $('.result a').click(campusFinder.fetchRecent);
-//     $('#submit').click(campusFinder.fetchSearch);   
-//   },
-//   // FINDER.COM GETTING CURRENT LOCATION
-//   getLocation: function(){
-//   },
-
-
-//   // FINDER.COM LOADING MAP
-//   loadMap: function(coordinates){
-    
-//   },
-//   // FINDER.COM AUTO ADDRESS SEARCHING
-  // initializeSearch: function() {
-    
-  // },
-  // FINDER.COM FOURSQUARE API FUNCTIONALTY FOR CURRENT LOCATION
-  
-  // FINDER.COM FOURSQUARE API AJAX REQUEST
-  // callback:function(para){
-  //   $.getJSON(campusFinder.path, para, function(data){
-  //     campusFinder.loadItems(data)
-  //   })
-
-  // },
-
-  // fetchSearch:function(event){
-   
-  // },
-//   // FINDER.COM FOURSQUARE API RECEIVE REQUEST
-//   loadItems:function(reply){
-//     console.log(reply)
-//     console.log(reply.response.groups[0].name);     
-//     var content = "";
-//     $.each(reply.response.groups, function(){
-//       $.each(this.items, function(){
-
-//         content += '<h2 class="nametag">' + this.venue.name + '</h2>'
-//         if(typeof this.venue.location.address !== "undefined"){
-//           content += '<p id="address">' + this.venue.location.address + '</p>'
-//         }
-//         else{
-//           content += '<p id="address">' + "Not available" + '</p>'
-//         };
-//         if(typeof this.venue.location.crossStreet !== "undefined"){  
-//           content += '<p id="crossStreet">' + this.venue.location.crossStreet + '</p>'
-//         }
-//         else{
-//           content += '<p id="crossStreet">' + "Not available" + '</p>'
-//         };
-//         if(typeof this.venue.location.city !== "undefined"){
-//         content += '<p id="city">' + this.venue.location.city + '</p>'
-//         }
-//         else{
-//           content += '<p id="city">' + "Not available" + '</p>'
-//         };          
-//       })
-//     }) 
-//     $('.outputBox').html(content);  
-//   } 
-// };
-// $(document).ready(campusFinder.initialize);
